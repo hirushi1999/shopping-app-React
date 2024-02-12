@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import logo from "../asset/logo1.png";
 import { FaCircleUser } from "react-icons/fa6";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState(false);
+  const handleShowMenu = ()=> {
+    setShowMenu(preve => !preve)
+  }
   return (
-    <header className='fixed shadow-md w-full h-14 px-2 md:px-4 z-50'> 
+    <header className='fixed shadow-md w-full h-14 px-2 md:px-4 z-50 bg-white'> 
         {/* desktop */}
         <div className='flex items-center h-full justify-between'>
             <Link to={""}>
@@ -26,14 +30,16 @@ const Header = () => {
                 <PiShoppingCartSimpleFill />
                 <div className='absolute -top-1 -right-1 text-white bg-red-500 w-4 rounded-full m-0 p-0 h-4 text-sm text-center'>0</div>
               </div>
-              <div className='text-slate-600 cursor-pointer'>
+              <div className='text-slate-600 cursor-pointer' onClick={handleShowMenu}>
                 <div className='text-2xl'>
                   <FaCircleUser /> 
                 </div>
-                <div className='absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md text-sm'>
-                  <p className='whitespace-nowrap cursor-pointer'>New Product</p>
-                  <p className='whitespace-nowrap cursor-pointer'>Login</p>
+                {
+                  showMenu && <div className='absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md text-sm flex flex-col'>
+                  <Link to={"newproduct"} className='whitespace-nowrap cursor-pointer'>New Product</Link>
+                  <Link to={"login"} className='whitespace-nowrap cursor-pointer'>Login</Link>
                 </div>
+                }
               </div>
             </div>
         </div>
