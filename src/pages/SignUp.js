@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import loginSignupImage from "../asset/login1.gif";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
+import { ImagetoBase64 } from "../utility/ImagetoBase64";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
+    image: "",
   });
 
   console.log(data);
@@ -25,12 +28,25 @@ const SignUp = () => {
     });
   };
 
+  const handleUploadProfileImage = async (e) => {
+    const data = await ImagetoBase64(e.target.files[0]);
+    console.log(data);
+
+    setData((preve) => {
+      return {
+        ...preve,
+        image: data,
+      };
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { firstName, email, password, confirmPassword } = data;
     if (firstName && email && password && confirmPassword) {
       if (password === confirmPassword) {
         alert("successful");
+        navigate("/login");
       } else {
         alert("password and confirm password not equal");
       }
@@ -43,8 +59,24 @@ const SignUp = () => {
     <div className="p-3 md:p-4">
       <div className="w-full max-w-sm bg-white m-auto flex flex-col p-4">
         {/* <h1 className='text-center text-2xl font-bold'>Sign Up</h1> */}
-        <div className="w-16 overflow-hidden rounded-full drop-shadow-md shadow-md items-center m-auto">
-          <img src={loginSignupImage} className="w-full" />
+        <div className="w-16 h-16 overflow-hidden rounded-full drop-shadow-md shadow-md items-center m-auto relative ">
+          <img
+            src={data.image ? data.image : loginSignupImage}
+            className="w-full h-full"
+          />
+
+          <label htmlFor="profileImage">
+            <div className="absolute bottom-0 h-1/3 bg-slate-500 bg-opacity-50 w-full text-center cursor-pointer">
+              <p className="text-xs p-1 text-white">Upload</p>
+            </div>
+            <input
+              type={"file"}
+              id="profileImage"
+              accept="image/*"
+              className="hidden"
+              onChange={handleUploadProfileImage}
+            />
+          </label>
         </div>
 
         <form className="w-full py-3 flex flex-col" onSubmit={handleSubmit}>
