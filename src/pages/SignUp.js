@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -58,8 +59,11 @@ const SignUp = () => {
 
         const dataRes = await fetchData.json();
         console.log(dataRes);
-        alert("successful");
-        // navigate("/login");
+        // alert(dataRes.message);
+        toast(dataRes.message);
+        if (dataRes.alert) {
+          navigate("/login");
+        }
       } else {
         alert("password and confirm password not equal");
       }
