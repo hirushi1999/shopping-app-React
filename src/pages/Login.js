@@ -3,13 +3,15 @@ import loginSignupImage from "../asset/login1.gif";
 import { Link } from "react-router-dom";
 import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   console.log(data);
 
   const handleOnChange = (e) => {
@@ -22,11 +24,28 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = data;
     if (email && password) {
-      alert("successful");
+      const fetchData = await fetch(
+        `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const dataRes = await fetchData.json();
+      console.log(dataRes);
+      toast(dataRes.message);
+
+      if (dataRes.alert) {
+        navigate("/");
+      }
     } else {
       alert("Please enter required fields");
     }
