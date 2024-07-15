@@ -5,6 +5,7 @@ import { BiShow } from "react-icons/bi";
 import { BiHide } from "react-icons/bi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -12,7 +13,11 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
-  console.log(data);
+
+  const userData = useSelector((state) => state);
+  console.log(userData.user);
+
+  const dispatch = useDispatch();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
