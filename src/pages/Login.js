@@ -6,6 +6,7 @@ import { BiHide } from "react-icons/bi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { loginRedux } from "../redux/userSlice";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -15,7 +16,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const userData = useSelector((state) => state);
-  console.log(userData.user);
 
   const dispatch = useDispatch();
 
@@ -49,6 +49,7 @@ const Login = () => {
       toast(dataRes.message);
 
       if (dataRes.alert) {
+        dispatch(loginRedux(dataRes));
         navigate("/");
       }
     } else {
