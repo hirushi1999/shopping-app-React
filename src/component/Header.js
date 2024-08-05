@@ -5,12 +5,11 @@ import { FaCircleUser } from "react-icons/fa6";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
-import toast from "react-hot-toast";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userData = useSelector((state) => state.user);
-  console.log(userData);
+  console.log(userData.email);
   const dispatch = useDispatch();
 
   const handleShowMenu = () => {
@@ -19,9 +18,8 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutRedux());
-    toast("Logout successfully");
   };
-
+  console.log(process.env.REACT_APP_ADMIN_EMAIL);
   return (
     <header className="fixed shadow-md w-full h-14 px-2 md:px-4 z-50 bg-white">
       {/* desktop */}
@@ -61,12 +59,15 @@ const Header = () => {
             </div>
             {showMenu && (
               <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md text-sm flex flex-col">
-                <Link
-                  to={"newproduct"}
-                  className="whitespace-nowrap cursor-pointer"
-                >
-                  New Product
-                </Link>
+                {userData.email === process.env.REACT_APP_ADMIN_EMAIL && (
+                  <Link
+                    to={"newproduct"}
+                    className="whitespace-nowrap cursor-pointer"
+                  >
+                    New Product
+                  </Link>
+                )}
+
                 {userData.email ? (
                   <p
                     className="cursor-pointer text-red-500"

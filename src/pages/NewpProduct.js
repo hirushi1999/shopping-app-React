@@ -63,7 +63,7 @@ const NewpProduct = () => {
         };
       });
     } else {
-      toast("Enter required fields.");
+      toast("Enter required fiels");
     }
   };
 
@@ -79,6 +79,7 @@ const NewpProduct = () => {
           name="name"
           className="bg-slate-200 p-1 my-1"
           onChange={handleOnChange}
+          value={data.name}
         />
 
         <label htmlFor="category">Category</label>
@@ -87,10 +88,11 @@ const NewpProduct = () => {
           id="category"
           name="category"
           onChange={handleOnChange}
+          value={data.category}
         >
           <option value={"other"}>--Select Category--</option>
           <option value={"bdayCakes"}>Birthday Cakes</option>
-          <option value={"wedCakes"}>Wedding Cakes</option>
+          <option value={"weddings"}>Wedding Cakes</option>
           <option value={"cupCakes"}>Cupcakes</option>
           <option value={"brownies"}>Brownies & Cookies</option>
           <option value={"season"}>Seasonal Cakes</option>
@@ -125,6 +127,7 @@ const NewpProduct = () => {
           className="bg-slate-200 p-1 my-1"
           name="price"
           onChange={handleOnChange}
+          value={data.price}
         />
 
         <label htmlFor="description">Description</label>
@@ -133,6 +136,7 @@ const NewpProduct = () => {
           name="description"
           className="bg-slate-200 p-1 my-1 resize-none"
           onChange={handleOnChange}
+          value={data.description}
         />
 
         <button className="bg-blue-400 hover:bg-blue-600 cursor-pointer text-lg font-medium text-white drop-shadow my-2">
