@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../asset/logo1.png";
+import logo from "../asset/image.png";
 import { FaCircleUser } from "react-icons/fa6";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,22 +21,32 @@ const Header = () => {
   };
   console.log(process.env.REACT_APP_ADMIN_EMAIL);
   return (
-    <header className="fixed shadow-md w-full h-14 px-2 md:px-4 z-50 bg-white">
+    <header className="fixed shadow-md w-full h-20 px-2 md:px-4 z-50 bg-white">
       {/* desktop */}
       <div className="flex items-center h-full justify-between">
         <Link to={""}>
-          <div className="h-14">
+          <div className="h-20 ml-10">
             <img src={logo} className="h-full" />
           </div>
         </Link>
 
-        <div className="flex items-center gap-4 md:gap-8">
+        <div className="flex items-center gap-4 md:gap-8 mr-14">
           <nav className="flex gap-4 md:gap-9 text-base md:text-sm font-medium">
-            <Link to={""}>HOME</Link>
-            <Link to={"order"}>ORDER ONLINE</Link>
-            <Link to={"about"}>ABOUT US</Link>
-            <Link to={"contact"}>CONTACT US</Link>
+            <Link className="hover:text-slate-400" to={""}>
+              HOME
+            </Link>
+            <Link className="hover:text-slate-400" to={"order"}>
+              ORDER ONLINE
+            </Link>
+            <Link className="hover:text-slate-400" to={"about"}>
+              ABOUT US
+            </Link>
+            <Link className="hover:text-slate-400" to={"contact"}>
+              CONTACT US
+            </Link>
           </nav>
+        </div>
+        <div className="flex items-center gap-4 md:gap-8 mr-14">
           <div className="text-2xl text-slate-600 relative">
             <PiShoppingCartSimpleFill />
             <div className="absolute -top-1 -right-1 text-white bg-red-500 w-4 rounded-full m-0 p-0 h-4 text-sm text-center">
@@ -58,11 +68,11 @@ const Header = () => {
               )}
             </div>
             {showMenu && (
-              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md text-sm flex flex-col">
+              <div className="absolute bg-black py-2 px-2 shadow drop-shadow-md text-sm flex flex-col">
                 {userData.email === process.env.REACT_APP_ADMIN_EMAIL && (
                   <Link
                     to={"newproduct"}
-                    className="whitespace-nowrap cursor-pointer"
+                    className="whitespace-nowrap cursor-pointer text-white py-1 "
                   >
                     New Product
                   </Link>
@@ -78,7 +88,7 @@ const Header = () => {
                 ) : (
                   <Link
                     to={"login"}
-                    className="whitespace-nowrap cursor-pointer"
+                    className="whitespace-nowrap cursor-pointer text-white"
                   >
                     Login
                   </Link>
