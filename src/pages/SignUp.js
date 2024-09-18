@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import loginSignupImage from "../asset/login1.gif";
 import { Link, useNavigate } from "react-router-dom";
-import { BiShow } from "react-icons/bi";
-import { BiHide } from "react-icons/bi";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
 import toast from "react-hot-toast";
 

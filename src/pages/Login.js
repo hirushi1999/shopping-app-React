@@ -49,7 +49,7 @@ const Login = () => {
       toast(dataRes.message);
 
       if (dataRes.alert) {
-        dispatch(loginRedux(dataRes));
+        dispatch(loginRedux(dataRes))
         navigate("/");
       }
     } else {

@@ -6,19 +6,26 @@ import toast, { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { setDataProduct } from "./redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setDataReview } from "./redux/reviewSlice";
 
 function App() {
-  const dispatch = useDispatch();
-  const productData = useSelector((state) => state.product);
+  const dispatch = useDispatch()
+  const productData = useSelector((state)=>state.product)
+  
+  useEffect(()=>{
+    (async()=>{
+      const [productRes, reviewRes] = await Promise.all([
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/product`),
+        fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/review`),
+      ]);
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/product`);
-      const resData = await res.json();
-      console.log(resData);
-      dispatch(setDataProduct(resData));
-    })();
-  }, []);
+      const productData = await productRes.json();
+      const reviewData = await reviewRes.json();
+      
+      dispatch(setDataProduct(productData)); 
+      dispatch(setDataReview(reviewData)); 
+    })()
+  }, [])
   return (
     <>
       <Toaster />
