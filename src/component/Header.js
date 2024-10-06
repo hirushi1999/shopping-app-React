@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 import ScrollToTop from './ScrollToTop';
 
 const Header = () => {
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const [showMenu, setShowMenu] = useState(false);
   const userData = useSelector((state)=>state.user);
   console.log(userData.email);
@@ -42,10 +43,10 @@ const Header = () => {
               </nav>
               </div>
               <div className='flex items-center gap-4 md:gap-8 mr-14'>
-              <div className='text-2xl text-slate-600 relative'>
+              <Link to="/cart" className='text-2xl text-slate-600 relative'>
                 <PiShoppingCartSimpleFill />
-                <div className='absolute -top-1 -right-1 text-white bg-red-500 w-4 rounded-full m-0 p-0 h-4 text-sm text-center'>0</div>
-              </div>
+                <div className='absolute -top-1 -right-1 text-white bg-red-500 w-4 rounded-full m-0 p-0 h-4 text-sm text-center'>{totalQuantity}</div>
+              </Link>
               <div className='text-slate-600 cursor-pointer' onClick={handleShowMenu}>
                 <div className='text-2xl h-8 w-8'>
                   {userData.image ? <img src={userData.image} className='h-full w-full overflow-hidden rounded-full drop-shadow-md'/> : <FaCircleUser />} 

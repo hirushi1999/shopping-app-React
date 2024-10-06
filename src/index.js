@@ -20,19 +20,22 @@ import { store } from "./redux/index";
 import { Provider } from "react-redux";
 import Category from "./pages/Category";
 import Product from "./component/Product";
+import Cart from "./component/Cart";
+import Checkout from "./component/Checkout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Home />}></Route>
       <Route path="order" element={<Order />} />
-      <Route path="order/:filterby" element={<Product />} />
       <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
       <Route path="login" element={<Login />} />
       <Route path="newproduct" element={<NewpProduct />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="category" element={<Category/>} />
+      <Route path="cart" element={<Cart/>} />
+      <Route path="checkout" element={<Checkout/>}/>
     </Route>
   )
 );
