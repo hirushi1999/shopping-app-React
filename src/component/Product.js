@@ -68,14 +68,22 @@ const Product = ({ product, isOpen, onClose  }) => {
               />
             </div>
 
-            {/* Add to Cart button */}
-            <button
-              className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-800 transition-colors"
-              // onClick={() => toast.success(`Added ${quantity} item(s) to cart`)}
-              onClick={handleAddToCart}
-            >
-              Add {quantity} to Cart
-            </button>
+            <div className="flex space-x-4">
+              {/* Add to Cart button */}
+              <button
+                className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors"
+                onClick={handleAddToCart}
+              >
+                Add {quantity} to Cart
+              </button>
+
+              <button
+                className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors"
+              >
+                Buy Now
+              </button>
+            </div>
+
           </div>
         </div>
       </div>

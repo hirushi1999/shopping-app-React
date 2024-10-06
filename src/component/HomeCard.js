@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaCartArrowDown, FaSearch } from "react-icons/fa";
+import { FaCartArrowDown } from "react-icons/fa";
 import Product from './Product';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
@@ -29,6 +29,7 @@ const HomeCard = ({ name, image, category, price }) => {
           src={image} 
           alt={name} 
           className='object-contain transform transition-transform duration-300 ease-in-out hover:scale-110' 
+          onClick={handleOpenProduct}
         />
       </div>
       {/* Wrap the name and price in a container for hover effect */}
@@ -46,13 +47,6 @@ const HomeCard = ({ name, image, category, price }) => {
             title="Add to Cart"
           >
             <FaCartArrowDown className='text-gray-600 text-3xl' />
-          </button>
-          <button 
-            onClick={handleOpenProduct}
-            className='p-2 bg-white rounded-full shadow-md hover:bg-gray-200 transition-colors duration-300 ease-in-out flex items-center justify-center mx-2'
-            title="Search Item"
-          >
-            <FaSearch className='text-gray-600 text-3xl'/>
           </button>
         </div>
       </div>

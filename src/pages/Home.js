@@ -98,9 +98,9 @@ const Home = () => {
             className={`slide ${currentSlide === index ? 'active' : ''} ${slide.bgColor} flex flex-col md:flex-row items-center justify-between w-full h-full transition-opacity duration-1000 ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'} absolute top-0 left-0`}
           >
             <div className="md:w-1/2 w-full p-4 md:ml-24 text-center md:text-left">
-              <p className="mt-20 md:mt-0 px-2 text-current text-sm font-Jost py-4 font-bold">{slide.promotion}</p>
+              <p className="mt-20 md:mt-0 px-2 text-current text-lg font-Jost py-4 font-bold">{slide.promotion}</p>
               <h2 className="text-3xl font-bold md:text-6xl font-lobster italic text-black">{slide.title}</h2>
-              <p className="mt-8 py-3 text-base text-slate-500 text-sm mb-3">{slide.description}</p>
+              <p className="mt-8 py-3 text-base text-slate-500 mb-3 font-semiboldds">{slide.description}</p>
               <Link to="/order">
                 <button className="font-bold bg-black text-white px-4 py-2 rounded-md mb-5">
                 Shop Now
