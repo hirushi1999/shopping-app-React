@@ -3,6 +3,9 @@ import CakeImage from "../asset/cakePiece.jpg"
 import Footer from '../component/Footer'
 import { toast } from 'react-hot-toast';
 import StarRating from 'react-star-rating-component';
+import ContactUs from "../asset/contact.jpg"
+import { FaDoorOpen, FaAddressCard, FaLocationArrow, FaMobile  } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const Contact = () => {
 
@@ -32,7 +35,6 @@ const Contact = () => {
 
   const handleSubmit = async(e) =>{
     e.preventDefault(); 
-    console.log(data);
 
     const {name, designation, comment, rating} = data;
     if(name && designation && comment && rating){
@@ -48,7 +50,6 @@ const Contact = () => {
       );
       
       const fetchRes = await fetchData.json();
-      console.log(fetchRes);
       toast(fetchRes.message);
 
       setData(() => {
@@ -60,99 +61,115 @@ const Contact = () => {
         })
       })
     } else{
-      toast("Enter required fiels");
+      toast("Enter required fields");
     } 
   }
 
   return (
-    <div>
-      <div className='bg-gradient-to-b from-white to-red-300 min-h-screen w-full p-6'>
-      <h1 className='text-4xl lg:text-6xl text-black font-bold mb-6'>Visit and Contact</h1>
+    <div className="w-full">
+      <div className="relative min-h-screen w-full p-6">
+        <div 
+          className="absolute inset-0 bg-cover bg-center filter blur-lg" 
+          style={{
+            backgroundImage: `url(${ContactUs})`, 
+            backgroundSize: 'cover',
+          }}
+        ></div>
+
         {/* Main Content Wrapper */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mt-10">
-          
-          {/* Left Section - Contact Info */}
-          <div className="lg:w-1/3 w-full p-5">
-            <div className='font-mono text-lg mb-8 leading-relaxed'>
-              <p>Open Mon-Sat: 8am to 7pm</p>
-              <p className='mt-6'>500 Terry Francine Street</p>
-              <p>Negombo, Sri Lanka</p>
-              <p className='mt-6'>123-456-7890</p>
-              <p><a href="mailto:info@mysite.com" className="text-blue-600 hover:underline">info@mysite.com</a></p>
-            </div>
-          </div>
+        <div className="relative z-10">
+          <h1 className='text-4xl lg:text-6xl text-black font-bold mb-6'>Visit and Contact</h1>
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mt-10">
 
-          {/* Center Section - Comment Form */}
-          <form className="lg:w-1/3 w-full p-6 bg-white rounded-lg shadow-lg mt-10 lg:mt-0"  onSubmit={handleSubmit}>
-            <h1 className='text-2xl text-black font-bold italic mb-4 text-center'>Leave Your Comment</h1>
-            <div className="grid gap-4">
+            {/* Left Section - Comment Form */}
+            <form className="lg:w-1/2 w-full p-6 bg-white rounded-lg shadow-lg m-20 lg:mt-0" onSubmit={handleSubmit}>
+              <h1 className='text-2xl text-black font-bold italic mb-4 text-center'>Leave Your Comment</h1>
+              {/* Form Fields */}
+              <div className="grid gap-4">
+                <div>
+                  <label className='block text-lg italic font-bold mb-1'>Name:</label>
+                  <input 
+                    type="text" 
+                    name="name" 
+                    className='w-full bg-red-100 p-2 text-black rounded-md focus:outline-none' 
+                    placeholder="Enter your name"
+                    onChange={handleOnChange}
+                    value={data.name}
+                  />
+                </div>
+                <div>
+                  <label className='block text-lg italic font-bold mb-1'>Designation:</label>
+                  <input 
+                    type="text" 
+                    name="designation" 
+                    className='w-full bg-red-100 p-2 text-black rounded-md focus:outline-none' 
+                    placeholder="Enter your designation"
+                    onChange={handleOnChange}
+                    value={data.designation}
+                  />
+                </div>
+                <div>
+                  <label className='block text-lg italic font-bold mb-1'>Comment:</label>
+                  <textarea 
+                    className='w-full bg-red-100 p-2 text-black rounded-md focus:outline-none' 
+                    name='comment'
+                    placeholder="Write your comment" 
+                    onChange={handleOnChange}
+                    value={data.comment}
+                    rows="4">
+                  </textarea>
+                </div>
+              </div>
               <div>
-                <label className='block text-lg italic font-bold mb-1'>Name:</label>
-                <input 
-                  type="text" 
-                  name="name" 
-                  id="name" 
-                  className='w-full bg-red-100 p-2 text-black rounded-md focus:outline-none' 
-                  placeholder="Enter your name"
-                  onChange={handleOnChange}
-                  value={data.name}
+                <label className='block text-lg italic font-bold mb-1'>Rate Your Experience:</label>
+                <StarRating 
+                  name="rating" 
+                  starCount={5} 
+                  value={data.rating} 
+                  onStarClick={handleStarClick} 
+                  className='text-3xl text-red-100'
                 />
               </div>
-              <div>
-                <label className='block text-lg italic font-bold mb-1'>Designation:</label>
-                <input 
-                  type="text" 
-                  name="designation" 
-                  id="designation" 
-                  className='w-full bg-red-100 p-2 text-black rounded-md focus:outline-none' 
-                  placeholder="Enter your designation"
-                  onChange={handleOnChange}
-                  value={data.designation}
-                />
+              <div className='text-center'>
+                <button className='px-6 py-2 bg-black rounded-full text-white mt-6 hover:bg-gray-700 transition-all'>
+                  Submit
+                </button>
               </div>
-              <div>
-                <label className='block text-lg italic font-bold mb-1'>Comment:</label>
-                <textarea 
-                  className='w-full bg-red-100 p-2 text-black rounded-md focus:outline-none' 
-                  name='comment'
-                  placeholder="Write your comment" 
-                  onChange={handleOnChange}
-                  value={data.comment}
-                  rows="4">
-                </textarea>
-              </div>
-            </div>
-            <div>
-            <label className='block text-lg italic font-bold mb-1'>Rate Your Experience:</label>
-              {/* Star rating component */}
-              <StarRating 
-                name="rating" 
-                starCount={5} 
-                value={data.rating} 
-                onStarClick={handleStarClick} 
-                className='text-3xl text-red-100'
+            </form>
+
+            {/* Right Section - Image and Details */}
+            <div className="lg:w-1/2 w-full p-10 flex flex-col justify-center items-center m-20 lg:mt-0">
+              <img 
+                src={CakeImage} 
+                alt="cakePiece" 
+                className='w-4/5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg mb-8'
               />
-            </div>
-            <div className='text-center'>
-              <button className='px-6 py-2 bg-black rounded-full text-white mt-6 hover:bg-gray-700 transition-all'>
-                Submit
-              </button>
-            </div>
-          </form>
 
-          {/* Right Section - Image */}
-          <div className="lg:w-1/3 w-full p-10 flex justify-center items-center mt-10 lg:mt-0">
-            <img 
-              src={CakeImage} 
-              alt="cakePiece" 
-              className='w-full rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg'
-            />
+              <div className='font-mono text-lg mb-8 leading-relaxed text-red-400 bg-white p-10 rounded-lg'>
+                <p className='flex items-center'>
+                  <FaDoorOpen className='mr-2' />
+                  Open Mon-Sat: 8am to 7pm
+                </p>
+                <p className='flex items-center mt-4'>
+                  <FaAddressCard className='mr-2'/>
+                  500 Terry Francine Street
+                </p>
+                <p className='flex items-center mt-4'>
+                  <FaLocationArrow className='mr-2'/>
+                  Negombo, Sri Lanka
+                </p>
+                <p className='flex items-center mt-4'><FaMobile className='mr-2'/>123-456-7890</p>
+                <p className='flex items-center mt-4'><MdEmail className='mr-2'/><a href="mailto:info@mysite.com" className="text-blue-600 hover:underline">info@mysite.com</a></p>
+              </div>
+            </div>
+
           </div>
-
         </div>
+      </div>
 
+      <div className="bg-gradient-to-b from-bg-slate-100 to-white">
         {/* Map Section */}
-        <div className="mt-10">
+        <div className="mt-10 p-6">
           <h1 className='text-2xl text-black font-bold italic text-center mb-4'>Find Us...</h1>
           <div className='flex justify-center'>
             <iframe
@@ -167,10 +184,11 @@ const Contact = () => {
             ></iframe>
           </div>
         </div>
+
+        <Footer />
       </div>
-      <Footer />
     </div>
   )
 }
 
-export default Contact
+export default Contact;

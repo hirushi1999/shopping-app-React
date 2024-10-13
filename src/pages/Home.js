@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import BirthdayCake from "../asset/birthday_slide6.png";
 import WeddingCake from "../asset/wed_slide1.png"
 import Cupcakes from "../asset/cupcake_slide1.png"
@@ -70,9 +69,9 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 5000); 
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
 
   const categories = [

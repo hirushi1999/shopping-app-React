@@ -3,6 +3,7 @@ import loginSignupImage from "../asset/login1.gif";
 import { Link, useNavigate } from "react-router-dom";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
 import toast from "react-hot-toast";
+import signImg from "../asset/signup.jpg"
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -14,8 +15,6 @@ const SignUp = () => {
     confirmPassword: "",
     image: "",
   });
-
-  console.log(data);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +28,6 @@ const SignUp = () => {
 
   const handleUploadProfileImage = async (e) => {
     const data = await ImagetoBase64(e.target.files[0]);
-    console.log(data);
 
     setData((preve) => {
       return {
@@ -38,7 +36,7 @@ const SignUp = () => {
       };
     });
   };
-  console.log(process.env.REACT_APP_SERVER_DOMAIN);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { firstName, email, password, confirmPassword } = data;
@@ -56,8 +54,6 @@ const SignUp = () => {
         );
 
         const dataRes = await fetchData.json();
-        console.log(dataRes);
-        // alert(dataRes.message);
         toast(dataRes.message);
         if (dataRes.alert) {
           navigate("/login");
@@ -71,13 +67,14 @@ const SignUp = () => {
   };
 
   return (
-    <div className="p-3 md:p-4">
-      <div className="w-full max-w-sm bg-white m-auto flex flex-col p-4">
-        {/* <h1 className='text-center text-2xl font-bold'>Sign Up</h1> */}
+    <div className='w-full h-screen  bg-cover bg-center' style={{ backgroundImage: `url(${signImg})`  }}>
+    <div className="p-3 md:p-4" >
+      <div className="w-full max-w-lg bg-orange-100 m-auto flex flex-col p-4 mt-10 rounded-lg">
         <div className="w-16 h-16 overflow-hidden rounded-full drop-shadow-md shadow-md items-center m-auto relative ">
           <img
             src={data.image ? data.image : loginSignupImage}
             className="w-full h-full"
+            alt='images'
           />
 
           <label htmlFor="profileImage">
@@ -95,7 +92,7 @@ const SignUp = () => {
         </div>
 
         <form className="w-full py-3 flex flex-col" onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="firstName" className="font-semibold">First Name</label>
           <input
             type={"text"}
             id="firstName"
@@ -105,7 +102,7 @@ const SignUp = () => {
             onChange={handleOnChange}
           />
 
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="lastName" className="font-semibold">Last Name</label>
           <input
             type={"text"}
             id="lastName"
@@ -115,7 +112,7 @@ const SignUp = () => {
             onChange={handleOnChange}
           />
 
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email" className="font-semibold">Email</label>
           <input
             type={"email"}
             id="email"
@@ -125,7 +122,7 @@ const SignUp = () => {
             onChange={handleOnChange}
           />
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className="font-semibold">Password</label>
           <input
             type={"password"}
             id="password"
@@ -135,7 +132,7 @@ const SignUp = () => {
             onChange={handleOnChange}
           />
 
-          <label htmlFor="confirmpassword">Confirm Password</label>
+          <label htmlFor="confirmpassword" className="font-semibold">Confirm Password</label>
           <input
             type={"password"}
             id="confirmpassword"
@@ -156,6 +153,7 @@ const SignUp = () => {
           </Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };

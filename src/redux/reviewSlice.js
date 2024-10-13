@@ -9,7 +9,6 @@ export const reviewSlice = createSlice({
     initialState,
     reducers : {
         setDataReview: (state,action)=>{
-            console.log(action)
             state.reviewList = [...action.payload]
         }
     }

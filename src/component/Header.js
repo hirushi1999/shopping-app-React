@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutRedux } from '../redux/userSlice';
 import { NavLink } from 'react-router-dom';
 import ScrollToTop from './ScrollToTop';
+import Cart from './Cart';
 
 const Header = () => {
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const [showMenu, setShowMenu] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
   const userData = useSelector((state)=>state.user);
-  console.log(userData.email);
+  
   const dispatch = useDispatch();
 
   const handleShowMenu = ()=> {
@@ -22,14 +24,23 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logoutRedux())
   }
-  console.log(process.env.REACT_APP_ADMIN_EMAIL);
+
+  const handleOpenCart = () => {
+    setOpenCart(true);
+  }
+
+  const handleCloseCart = () => {
+    setOpenCart(false);
+  }
+
   return (
+    <>
     <header className='fixed shadow-md w-full h-20 px-2 md:px-4 z-50 bg-white'> 
         {/* desktop */}
         <div className='flex items-center h-full justify-between'>
             <Link to={""}>
               <div className='h-20 ml-10'>
-                  <img src = { logo } className='h-full'/>
+                  <img src = { logo } alt='logo' className='h-full'/>
               </div>
             </Link>
 
@@ -43,13 +54,13 @@ const Header = () => {
               </nav>
               </div>
               <div className='flex items-center gap-4 md:gap-8 mr-14'>
-              <Link to="/cart" className='text-2xl text-slate-600 relative'>
-                <PiShoppingCartSimpleFill />
+              <div className='text-2xl text-slate-600 relative'  onClick={handleOpenCart}>
+                <PiShoppingCartSimpleFill/>
                 <div className='absolute -top-1 -right-1 text-white bg-red-500 w-4 rounded-full m-0 p-0 h-4 text-sm text-center'>{totalQuantity}</div>
-              </Link>
+              </div>
               <div className='text-slate-600 cursor-pointer' onClick={handleShowMenu}>
                 <div className='text-2xl h-8 w-8'>
-                  {userData.image ? <img src={userData.image} className='h-full w-full overflow-hidden rounded-full drop-shadow-md'/> : <FaCircleUser />} 
+                  {userData.image ? <img src={userData.image} alt='userImg' className='h-full w-full overflow-hidden rounded-full drop-shadow-md'/> : <FaCircleUser />} 
                 </div>
                 {
                   showMenu && <div className='absolute bg-black py-2 px-2 shadow drop-shadow-md text-sm flex flex-col'>
@@ -69,6 +80,14 @@ const Header = () => {
 
         {/* mobile */}
     </header>
+
+    {/* Modal for showing cart details */}
+    {openCart && (<Cart
+      isOpen={openCart}
+      onClose={handleCloseCart}
+    />)
+  }
+  </>
   )
 }
 

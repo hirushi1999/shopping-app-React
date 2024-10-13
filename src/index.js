@@ -19,9 +19,6 @@ import SignUp from "./pages/SignUp";
 import { store } from "./redux/index";
 import { Provider } from "react-redux";
 import Category from "./pages/Category";
-import Product from "./component/Product";
-import Cart from "./component/Cart";
-import Checkout from "./component/Checkout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,8 +31,6 @@ const router = createBrowserRouter(
       <Route path="newproduct" element={<NewpProduct />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="category" element={<Category/>} />
-      <Route path="cart" element={<Cart/>} />
-      <Route path="checkout" element={<Checkout/>}/>
     </Route>
   )
 );
@@ -47,7 +42,4 @@ root.render(
   </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
